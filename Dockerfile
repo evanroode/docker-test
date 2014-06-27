@@ -9,6 +9,6 @@ ENV APACHE_LOG_DIR /var/log/apache2
 
 EXPOSE 80
 
-ENTRYPOINT ["/usr/sbin/apache2"]
-CMD ["-D", "FOREGROUND"]
+#ENTRYPOINT ["/usr/sbin/apache2"]
+#CMD ["-D", "FOREGROUND"]
 
