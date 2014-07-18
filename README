@@ -1,0 +1,53 @@
+===========
+
+docker ps -q -a | xargs docker rm
+
+docker rmi $(docker images | grep "^<none>" | awk "{print $3}")
+===========
+
+
+
+----------
+$ boot2docker ssh ip addr show dev eth1
+
+   Typically, it is 192.168.59.103, but it could get changed by Virtualbox's DHCP implementation.
+----------
+
+----------
+$ boot2docker ip
+
+The VM's Host only interface IP address is: 192.168.59.103
+----------
+
+----------
+export DOCKER_HOST=tcp://192.168.59.103:2375
+----------
+
+
+----------
+
+# Linux, Apache, MySQL, PHP
+# image exposes ports 80 and 3306
+
+# stay attached
+docker run --rm -i -t -p 8080:80 -p 3304:3306 --name lamp tutum/lamp
+docker run --rm -i -t -p 8080:80              --name lamp tutum/lamp
+
+
+enable dns networking
+
+    docker run --net=host
+
+or
+
+    # http://serverfault.com/questions/453185/vagrant-virtualbox-dns-10-0-2-3-not-working/453260#453260
+    $ VBoxManage modifyvm "boot2docker-vm" --natdnsproxy1 on
+    $ VBoxManage modifyvm "boot2docker-vm" --natdnshostresolver1 on    <====
+
+https://github.com/boot2docker/boot2docker-cli/issues/102
+> boot2docker up
+> boot2docker ssh
+> sudo udhcpc
+> sudo /etc/init.d/docker restart
+> exit
+
