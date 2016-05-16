@@ -1,5 +1,5 @@
 FROM ubuntu:12.04
-MAINTAINER Erik van Roode <evanroode@sbcglobal.net>
+MAINTAINER Erik van Roode <erikvroode@gmail.com>
 
 # Install packages
 RUN apt-get update
